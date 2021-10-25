@@ -17,7 +17,7 @@ namespace XUnitStudyProject.Tests
             Assert.Equal("Main", result.ViewName);
             Assert.Equal(typeof(IndexViewModel), result.Model.GetType());
             Assert.NotNull(result.Model);
-            Assert.Equal(200, result.StatusCode);
+           // Assert.Equal(200, result.StatusCode);
             Assert.Equal("Добрый день, это тестовый текст на главной странице", result?.ViewData["Message"]);
         }
         
@@ -26,7 +26,7 @@ namespace XUnitStudyProject.Tests
         {
             HomeController controller = new HomeController();
             ViewResult result = controller.Privacy() as ViewResult;
-            Assert.Contains("Текст политики конфидециальности", result?.ViewData["Policy"].ToString());
+            Assert.Contains("Текст политики конфидециальности", (string)result?.ViewData["Policy"]);
             Assert.Equal("Privacy", result?.ViewName);
             Assert.True(result?.Model is null);
             Assert.EndsWith("сайта.", result?.ViewData["Policy"] as string);

@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Logging;
+using System;
 using XUnitStudyProject.Models;
 
 namespace XUnitStudyProject.Controllers
 {
+   
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            IndexViewModel model = new IndexViewModel();
+            ViewData["Message"] = "Добрый день, это тестовый текст на главной странице";
+            return View("Main", model);
         }
 
         public IActionResult Privacy()
         {
-            return View("Policy");
+            ViewData["Policy"] = "Текст политики конфидециальности сайта.";
+            return View("Privacy");
         }
 
         public IActionResult TestPage(int page)
