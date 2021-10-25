@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace XUnitStudyProject.Services
@@ -12,8 +11,13 @@ namespace XUnitStudyProject.Services
         /// <param name="password"></param>
         public byte[] Md5HashPassword(string password)
         {
-            return new byte[0];
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encrypt;
+            UTF8Encoding encode = new UTF8Encoding();
+            encrypt = md5.ComputeHash(encode.GetBytes(password));
+            return encrypt;
         }
+
         /// <summary>
         /// Метод принимает в себя MD5 hash (массив байт)
         /// </summary>
@@ -21,7 +25,12 @@ namespace XUnitStudyProject.Services
         /// <returns>Возвращается значение хэша в hexCode</returns>
         public string ToHex(byte[] bytes)
         {
-            return String.Empty;
+            StringBuilder hex = new StringBuilder(bytes.Length * 2);
+            foreach (byte b in bytes)
+            {
+                hex.AppendFormat("{0:x2}", b);
+            }
+            return hex.ToString();
         }
     }
 }
