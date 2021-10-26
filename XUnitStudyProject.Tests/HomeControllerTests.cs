@@ -1,8 +1,9 @@
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using Xunit;
 using XUnitStudyProject.Controllers;
-
+using XUnitStudyProject.Models;
 
 namespace XUnitStudyProject.Tests
 {
@@ -33,6 +34,14 @@ namespace XUnitStudyProject.Tests
             Assert.Equal(39, (result?.ViewData["Policy"] as string).Length);
         }
  
-        
+        [Fact]
+        public void TestPageTest()
+        {
+            HomeController controller = new HomeController();
+            int page = new Random().Next(0, 1000);
+            ViewResult result = controller.TestPage(page) as ViewResult;
+            Assert.NotNull(result);
+            Assert.IsType<TestPageViewModel>(result.Model);
+        }
     }
 }
